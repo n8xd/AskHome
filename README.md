@@ -16,7 +16,7 @@ and a Lambda Function.  I've included screen shots that will help you configure 
 and I've provided the code to talk to smartthings for Lambda, you only need to fill in a smartthings 
 App id and token to make it work.
 
-There are 3 steps for making AskAlexa your own.
+There are 3 steps for making AskAlexa.groovy your own.
 
 1.  Decide what nouns you want to interact with.
 2.  Add the devices that control or report information about the noun
