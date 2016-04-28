@@ -1,6 +1,7 @@
 # AskHome
 
 A programming platform that uses Amazon Alexa to work with SmartThings.  
+
 It is unique in that it is Person, Place, Thing (noun) centric, not device centric.
 This SmartThings smartApp is for groovy programmers....all the logic is in the program
 not in "fill in the blanks".  This gives tremendous freedom for those that know code
