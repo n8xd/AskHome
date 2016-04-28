@@ -17,7 +17,8 @@ and I've provided the code to talk to smartthings for Lambda, you only need to f
 App id and token to make it work.
 
 There are 3 steps for making AskAlexa your own.
-1.  Decide what nouns you want to interact with.
+
+1.  Decide what nouns you want to interact with./n
 2.  Add the devices that control or report information about the noun
 3.  call capability and noun subroutines based on keywords
 
