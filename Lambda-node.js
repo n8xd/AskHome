@@ -1,3 +1,5 @@
+// Copyright 2016 Keith DeLong (n8xd)
+// Apache 2.0 license - http://www.apache.org/licenses/LICENSE-2.0
 'use strict';
 exports.handler = function( event, context ) {
    var https = require( 'https' );
