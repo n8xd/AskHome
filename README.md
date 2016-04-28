@@ -9,8 +9,7 @@ to generate complex and intuitive interactions.
 
 For those that do not enjoy coding, AskHome is not for you.   MichaelS is developing a 
 device centric app called AskAlexa that works really well. (I'll add the link when Michael is ready)
-Fill in the blanks, and you can talk to devices by their capabilities...and more!  
-Go get that App instead.
+Fill in the blanks, and you can talk to devices by their capabilities...and more!  Go get that App!
 
 The installation requires an Amazon Developer Account.  You need to create an Alexa skill
 and a Lambda Function.  I've included screen shots that will help you configure the Alexa Skill,
