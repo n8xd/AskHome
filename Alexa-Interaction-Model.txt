@@ -1,0 +1,255 @@
+**** Intents ****
+
+Intents (cut and paste between the lines)
+----------------------------------------------------------------------
+{
+  "intents": [
+    {
+      "intent": "Home",
+      "slots": [
+        {
+          "name": "Operator",
+          "type": "LIST_OF_OPERATORS"
+        },
+        {
+          "name": "Noun",
+          "type": "LIST_OF_NOUNS"
+        },
+        {
+          "name": "Operand",
+          "type": "LIST_OF_OPERANDS"
+        },
+        {
+          "name": "Inquisitor",
+          "type": "LIST_OF_INQUISITORS"
+        }
+        ]
+    }
+  ]
+}
+----------------------------------------------------------------------
+
+
+Sample Utterances (cut and paste between the lines)
+----------------------------------------------------------------------
+Home about the {Noun}
+Home if the {Noun} are {Operator}
+Home {Inquisitor} {Noun} are {Operator}
+Home {Inquisitor} {Operator} is the {Noun}
+Home {Inquisitor} the {Noun} {Operator}
+Home {Inquisitor} the {Noun} is {Operator}
+Home {Inquisitor} the {Noun} is turned {Operator}
+Home for the {Operator} of the {Noun}
+Home for the {Noun} {Operator}
+Home for the {Operator} of {Noun}
+Home to turn {Operator} the {Noun}
+Home to turn the {Noun} {Operator}
+Home {Noun} {Operator}
+Home to {Operator} {Noun}
+Home {Inquisitor} {Noun} {Operator}
+Home to turn {Operator} on the {Noun}
+Home to check the {Operator} of {Noun}
+Home to check the {Operator} of the {Noun}
+Home to {Operator} of the {Noun} to {Operand}
+Home to {Operator} the {Noun}
+Home to {Operator} the {Noun} {Operand}
+Home to tell me {Inquisitor} the {Noun} is {Operator}
+Home {Operator} the {Noun}
+----------------------------------------------------------------------
+
+
+**** Custom Slots ****
+
+LIST_OF_INQUISITORS
+----------------------------------------------------------------------
+is
+are
+who
+what
+when
+where
+why
+how
+which
+----------------------------------------------------------------------
+
+
+LIST_OF_NOUNS         (really, YOU will make up your own list here, examples)
+----------------------------------------------------------------------
+Bedroom Light
+Medic Button
+Water Shutoff Valve
+Kitchen Air
+Basement Air
+Hallway Air
+Pool
+Pool Stereo
+Pool Gate
+East Lamp Post
+West Lamp Post
+Star Sensor
+Front Door
+Back Door
+Basement Motion
+Porch Lamp
+Basement
+Water
+Batteries
+Weather
+Cloths
+Wash
+Laundry
+Sparty
+Wolverine
+Stove
+Keith
+
+LIST_OF_OPERATORS         (be sure to include your own new operators)
+----------------------------------------------------------------------
+status
+on
+off
+presence
+present
+not present
+open
+close
+closed
+battery
+smoke
+co
+color
+lock
+unlock
+locked
+unlocked
+temperature
+motion
+cold
+hot
+warm
+cool
+dead
+low
+poll
+update
+high
+done
+finished
+go
+
+LIST_OF_OPERANDS
+----------------------------------------------------------------------
+black
+white
+blue
+green
+yellow
+orange
+purple
+pink
+red
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+----------------------------------------------------------------------
+
+
