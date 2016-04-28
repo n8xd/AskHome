@@ -34,4 +34,5 @@ if you set the color in lighting.   Outside Lights, lightup, green.   Yea, you c
 too, just like the Nouns.  You don't have to use just on, off, open, close, etc.
 
 So if you like Alexa, and you want to ask her do anything...you're only limited by your imagination.
+So what will YOUR version of AskHome do?
 
