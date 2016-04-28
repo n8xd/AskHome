@@ -13,4 +13,4 @@ to devices by their capabilities...and more!  Go get that App instead.
 The installation requires an Amazon Developer Account.  You need to create an Alexa skill
 and a Lambda Function.  I've included screen shots that will help you configure the Alexa Skill,
 and I've provided the code to talk to smartthings for Lambda, you only need to fill in a smartthings 
-App id and token to make it work.  (in progress...)
+App id and token to make it work.
