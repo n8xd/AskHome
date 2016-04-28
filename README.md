@@ -37,3 +37,11 @@ on, off, open, close, that are associated with the capabilities.
 So if you like Alexa, and you want to ask her do anything...you're only limited by your imagination now.
 So what will YOUR version of AskHome do?
 
+
+
+
+
+
+
+Comming soon...AskCabin  (start  with an exact copy of your AskHome, change the Intent and ask word....then 
+add the nouns and devices for your getaway home!
