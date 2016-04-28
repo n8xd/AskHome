@@ -29,10 +29,11 @@ switches, thermometers that control and sense a place, or a lock and a contact
 sensor that control and report on a door.
 
 Alexa gives you words...A Noun, and Operator, and sometimes an operand.  A switch/case structure lists
-the Nouns, and performs subroutine calls based on the Operator.  Sometimes there's an Operand...like
-if you set the color in lighting.   Outside Lights, lightup, green.   Yea, you can make up your own operators
-too, just like the Nouns.  You don't have to use just on, off, open, close, etc.
+the Nouns, and performs subroutine calls based on the Operator.  An example like setting the color in lighting.
+So "ask home to light up the outside with green" could give you the words  Outside, light up, green.   
+Yea, "light up" -- you can make up your own operators too, just like the Nouns.  You don't have to only use 
+on, off, open, close, that are associated with the capabilities.
 
-So if you like Alexa, and you want to ask her do anything...you're only limited by your imagination.
+So if you like Alexa, and you want to ask her do anything...you're only limited by your imagination now.
 So what will YOUR version of AskHome do?
 
