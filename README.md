@@ -22,12 +22,11 @@ There are 3 steps for making AskAlexa your own.
 2.  Add the devices that control or report information about the noun
 3.  call capability and noun subroutines based on keywords
 
-Nouns:  Person, Place, Thing
-Like:  YOU, Living Room, Front Door
+Nouns:  Person, Place, Thing  --  Like:  YOU, Living Room, Front Door
 
-Devices:  SmartThings!
-Like:  A presence sensor to detect YOU; Lights, switches, thermometers that control and sense a place, 
-or a lock and a contact sensor that control and report on a door.
+Devices:  SmartThings!   --  Like:  A presence sensor to detect YOU; Lights, 
+switches, thermometers that control and sense a place, or a lock and a contact 
+sensor that control and report on a door.
 
 Alexa gives you words...A Noun, and Operator, and sometimes an operand.  A switch/case structure lists
 the Nouns, and performs subroutine calls based on the Operator.  Sometimes there's an Operand...like
