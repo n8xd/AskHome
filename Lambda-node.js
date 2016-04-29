@@ -1,12 +1,12 @@
-// Copyright 2016 Keith DeLong (n8xd)
-// Apache 2.0 license - http://www.apache.org/licenses/LICENSE-2.0
 'use strict';
 exports.handler = function( event, context ) {
    var https = require( 'https' );
    
    var STappID = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  // AppID from Apps Editor
    var STtoken = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';  //Token from Apps Editor
-
+   //var STappID = '6f89555e-76f7-4264-b349-ffe05fe3ae39' // ID for Auto OAUTH
+   //if (event.session.user.accessToken) {STtoken = event.session.user.accessToken; }
+   
    if (event.request.intent.name == "Home") {
         var Operator = event.request.intent.slots.Operator.value;
         var Noun = event.request.intent.slots.Noun.value;
@@ -48,3 +48,5 @@ function output( text, context ) {
       },
    shouldEndSession: true
    };
+   context.succeed( { response: response } );
+}
