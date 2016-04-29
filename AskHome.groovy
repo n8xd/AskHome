@@ -12,7 +12,7 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  *
- *
+ *  4/29/16 KHD (n8xd) adjusted some response wording 
  *  4/26/16 KHD (n8xd) call it anything, control anything, devices, rooms, etc
  *  4/22/16 KHD (n8xd) recoded centralCommand with capability subroutines
  *  4/20/16 KHD (n8xd) test jig for processing device and op commands sent through Alexa/Lambda
@@ -52,6 +52,8 @@ preferences {
         input "fdlocker","capability.lock", title: "Select the front door lock", required: true, multiple: false
         input "fdlockcon","capability.contactSensor", title: "Select the front door contact sensor", required: true, multiple: false
         input "fdpasswd","string",title: "Unlock password for front door (2 digits)", required: true, multiple: false
+        input "porchlt","capability.switch",title: "Select the porch light",required:true, multiple: false
+        input "porchmot","capability.motionSensor",title: "Select the porch motion sensor",required:true, multiple: false
         input "bdlocker","capability.lock", title: "Select the back door lock", required: true, multiple: false
         input "bdlockcon","capability.contactSensor", title: "Select the back door contact sensor", required: true, multiple: false
         input "bdpasswd","string",title: "Unlock password for back door (2 digits)", required: true, multiple: false
@@ -119,7 +121,7 @@ def centralCommand() {
 
         switch (noun) {
             case "bedroom light"       :  switch(op) {       // simple on and off
-                                            case "on"        : 
+                                            case "on"        :
                                             case "off"       : 
                                             case "status"    : switchResponse(brlight,noun,op); break
                                             default          : defaultResponseUnkOp(noun,op)
@@ -162,6 +164,8 @@ def centralCommand() {
                                             case "on"         :
                                             case "off"        :
                                             case "status"     : valveResponseOnOff(valv,noun,op); break
+                                                              //totally unrelated to the valve, but uses water
+                                            case "boiling"    : motionSensorBoilingWaterResponse(stovmot,noun,op); break
                                             default           : defaultResponsibilityUnkOp(noun,op)
                                           }
                                           break
@@ -172,7 +176,7 @@ def centralCommand() {
                                             case "battery"    : batteryResponse(ksbat,noun,op); break
                                             case "status"     : smokeDetectorResponse(kssmok,noun,op); //do all 3
                                                                 CODetectorResponse(ksco,noun,op); 
-                                                                batteryResponse(ksbat,noun,op); break                                                                     
+                                                                temperatureMeasurementResponse(stovtemp,noun,op); break                                                                     
                                             default           : defaultResponseUnkOp(noun,op)
                                           }
                                           break
@@ -194,7 +198,7 @@ def centralCommand() {
                                             case "battery"    : batteryResponse(babat,noun,op); break
                                             case "status"     : smokeDetectorResponse(basmok,noun,op); //do all 3
                                                                 CODetectorResponse(baco,noun,op); 
-                                                                batteryResponse(babat,noun,op); break                                                                     
+                                                                temperatureMeasurementResponse(btherm,noun,op); break                                                                     
                                             default           : defaultResponseUnkOp(noun,op)
                                           }
                                           break
@@ -228,14 +232,14 @@ def centralCommand() {
                                           break
                                           
             case "wolverine"           :  switch (op) {       // change the lights out front to University of Michigan colors
-                                            case "go"         : colorControlResponse(edlight,noun,op,"blue"); 
-                                                                colorControlResponse(wdlight,noun,op,"yellow");
+                                            case "go"         : colorControlResponse(wdlight,noun,op,"maize");
+                                                                colorControlResponse(edlight,noun,op,"blue"); 
                                                                 break
                                             default           : defaultResponseUnkOp(noun, op)
                                           }
                                           break
                                           
-            case "star sensor"         :  switch(op) {        // one xyz and one calculated enumeration
+            case "star"                :  switch(op) {        // one xyz and one calculated enumeration
                                             case "status"     : threeAxisResponse(thax,noun,op); break
                                             default           : defaultResponseUnkOp(noun,op)
                                           }
@@ -245,7 +249,10 @@ def centralCommand() {
                                             case "lock"       :
                                             case "unlock"     : lockResponse(fdlocker,noun,op,opa); break
                                             case "status"     : lockResponse(fdlocker,noun,op,opa); // do both
-                                                                contactSensorResponse(fdlockcon,noun,op); break
+                                                                contactSensorResponse(fdlockcon,noun,op); 
+                                                                switchResponse(porchlt,"porch light",op);
+                                                                motionSensorResponse(porchmot,"porch",op);
+                                                                break
                                            default            : defaultResponseUnkOp(noun,op)
                                           }
                                           break
@@ -280,7 +287,7 @@ def centralCommand() {
                                            }
                                            break
 
-             case "stove"               : switch (op) {       // did I leave the stove on?  Water boiling? (motion)
+             case "stove"               : switch (op) {       // did I leave the stove on?  
                                             case "status"     : stoveNounResponse(stovtemp,kittemp,stovmot); break 
                                             default           : defaultResponseUnkOp(noun,op)
                                           }
@@ -288,6 +295,7 @@ def centralCommand() {
                                           
              case "Keith"               : switch (op) {
                                             case "status"     : keithNounResponse(); break
+                                            case "there"      :
                                             case "presence"   : 
                                             case "present"    : presenceSensorResponse(cbpres,noun,op); break
                                             default           : defaultResponseUnkOp(noun,op)
@@ -458,7 +466,20 @@ def temperatureMeasurementResponse(handle, noun, op)
 def motionSensorResponse(handle, noun, op)
 {
       def arg = handle.currentValue("motion")
-      state.talk2me = state.talk2me + "The ${noun} motion is ${arg}.  "
+      if (arg == "active") { arg = "motion" }
+      else if ( arg == "inactive") { arg = "no motion" }
+     
+      state.talk2me = state.talk2me + "There is ${arg} in the ${noun}.  "
+}
+
+def motionSensorBoilingWaterResponse(handle,noun,op)
+{
+      def arg = handle.currentValue("motion")
+      def arg2 = ""
+      
+      if (arg == "active") { arg = "motion"; arg2 = "boiling"; }
+      else if ( arg == "inactive") { arg = "no motion"; arg2 = "not boiling"; }
+      state.talk2me = state.talk2me + "Their is ${arg}.  The water is ${arg2}."
 }
 
 
@@ -513,6 +534,7 @@ def clothsNounResponse(handlew,handled)
      state.talk2me = state.talk2me + "The washer is ${wnot} running, and the dryer is ${dnot} running.  "
 }
 
+
 def stoveNounResponse(handlestovetemp, handleroomtemp, handlestovemotion)
 {
      def stemp = handlestovetemp.currentValue("temperature")
@@ -558,10 +580,11 @@ private colorWordtoHue(colorWord)
         case "blue"  : hueColor = 70; break
         case "green" : hueColor = 39; break
         case "yellow": hueColor = 17; break
+        case "maize" : hueColor = 17; break
         case "orange": hueColor = 10; break
         case "purple": hueColor = 75; break
         case "Pink"  : hueColor = 83; break
-        case "Red"   : hueColor = 100; break;
+        case "Red"   : hueColor = 100; break
      }
      return hueColor
 } 
