@@ -12,7 +12,6 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  *
- *  5/4/16  KHD (n8xd) added OAUTH token connect inside app
  *  4/29/16 KHD (n8xd) adjusted some response wording for motion
  *  4/26/16 KHD (n8xd) call it anything, control anything, devices, rooms, etc
  *  4/22/16 KHD (n8xd) recoded centralCommand with capability subroutines
@@ -20,7 +19,7 @@
  */
  
 definition(
-    name: "AskHome",
+    name: "AskHome Bare",
     namespace: "n8xd",
     author: "n8xd",
     description: "Do what Alexa tells us to do",
@@ -28,44 +27,21 @@ definition(
     iconUrl: "https://raw.githubusercontent.com/n8xd/AskHome/master/askhome108.png",
     iconX2Url: "https://raw.githubusercontent.com/n8xd/AskHome/master/askhome512.png")
 
-
-preferences {
-   page(name: "connectDevPage")
-   page(name: "oauthPage")
-   }
-
 // Use inputs to attach smartthings devices to this app
-def connectDevPage() {
-   dynamicPage(name: "connectDevPage", title:"Connect Devices", nextPage: "oauthPage",  uninstall: true ) {
-      section(title: "Select Devices") {
+preferences {
+    section(title: "Select Devices") {
         input "brlight", "capability.switch", title: "Select the Bedroom Light", required: true, multiple:false
-        // Add your inputs here
-      }
-   }
+    }
+    section(title: "App ID") {
+     paragraph "Application ID:\n${app.id}"
+    }
 }
-
-// Utility Page for reporting OAUTH token information.
-def oauthPage() {
-   if (!state.tok) {          
-      try {
-         state.tok = createAccessToken()
-      } catch (error) {
-         state.tok = null
-      }
-   }
-   dynamicPage(name: "oauthPage", title:"",  uninstall: false ) {
-      section(title: "Show the OAUTH ID/Token Pair") {
-        paragraph "   var STappID = '${app.id}';\n   var STtoken = '${state.tok}';\n"
-      }
-   }
-      
-}
-
-
-mappings { path("/:noun/:operator/:operand/:inquiz"){ action: [GET: "centralCommand"] } }
 
 def installed() {}
 def updated() {}
+
+mappings { path("/:noun/:operator/:operand/:inquiz"){ action: [GET: "centralCommand"] } }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Central Command
@@ -116,9 +92,6 @@ def centralCommand() {
                                             default          : defaultResponseUnkOp(noun,op)
                                           }
                                           break
-                                          
-            // Add your case statements here
-            
              case "none"                :  defaultResponseWhat()
                                            break
                                           
@@ -437,4 +410,3 @@ private isNear(w, d)
 	def tol = 200
     return  Math.abs((w - d)) < tol      
  }
-
