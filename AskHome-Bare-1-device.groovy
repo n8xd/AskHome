@@ -50,7 +50,7 @@ def oauthPage() {
       try {
          state.tok = createAccessToken()
       } catch (error) {
-         state.tok = ""
+         state.tok = null
       }
    }
    dynamicPage(name: "oauthPage", title:"",  uninstall: false ) {
