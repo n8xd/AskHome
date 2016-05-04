@@ -31,12 +31,12 @@ definition(
 
 preferences {
    page(name: "connectDevPage")
-   page(name: "oauthPage")
+
    }
 
 // Use inputs to attach smartthings devices to this app
 def connectDevPage() {
-   dynamicPage(name: "connectDevPage", title:"Connect Devices", nextPage: "oauthPage",  uninstall: true ) {
+   dynamicPage(name: "connectDevPage", title:"Connect Devices", input: true, uninstall: true ) {
       section(title: "Select Devices") {
         input "brlight", "capability.switch", title: "Select the Bedroom Light", required: true, multiple:false
         input "cbpres","capability.presenceSensor", title: "Select the Iris Care Medic Button presence", required: true, multiple:false
@@ -75,24 +75,11 @@ def connectDevPage() {
         input "stovmot","capability.motionSensor",title: "Select the above stove motion sensor", required: true, multiple: false
         input "poller","capability.polling", title: "Select the weather app to poll", required: true, multiple: false
       }
-   }
-}
-
-// Utility Page for reporting OAUTH token information.
-def oauthPage() {
-   if (!state.tok) {          
-      try {
-         state.tok = createAccessToken()
-      } catch (error) {
-         state.tok = null
-      }
-   }
-   dynamicPage(name: "oauthPage", title:"",  install: true, uninstall: false ) {
+      if (!state.tok) { try { state.tok = createAccessToken()} catch (error) {state.tok = null }}
       section(title: "Show the OAUTH ID/Token Pair") {
         paragraph "   var STappID = '${app.id}';\n   var STtoken = '${state.tok}';\n"
       }
    }
-      
 }
 
 
