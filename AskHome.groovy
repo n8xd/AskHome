@@ -84,7 +84,6 @@ def oauthPage() {
       try {
          state.tok = createAccessToken()
       } catch (error) {
-         paragraph "Enable OAuth in the SmartApp Editor App Settings"
          state.tok = ""
       }
    }
