@@ -27,7 +27,7 @@ preferences {
     section(title: "Create an OAUTH ID/Token Pair") {
             try {
                 def tok = createAccessToken()
-                paragraph "   var STappID = '${app.id}';\n   var STtoken = '${tok}'\n"
+                paragraph "   var STappID = '${app.id}';\n   var STtoken = '${tok}';\n"
             } catch (error) {
                  paragraph "Enable OAuth in the SmartApp editor under App Settings"
             }
