@@ -44,6 +44,9 @@ def connectDevPage() {
       section(title: "Show the OAUTH ID/Token Pair") {
         paragraph "   var STappID = '${app.id}';\n   var STtoken = '${state.tok}';\n"
       }
+      section([mobileOnly:true]) {
+		label title: "Assign a name", required: false
+      }
    }
 }
 
