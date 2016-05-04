@@ -22,7 +22,7 @@ def oauthPage() {
          state.tok = null
       }
    }
-   dynamicPage(name: "oauthPage", title:"",  uninstall: false ) {
+   dynamicPage(name: "oauthPage", title:"",  install: true, uninstall: false ) {
       section(title: "Show the OAUTH ID/Token Pair") {
         paragraph "   var STappID = '${app.id}';\n   var STtoken = '${state.tok}';\n"
       }
